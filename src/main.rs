@@ -38,7 +38,15 @@ fn view(app: &App, _model: &Model, frame: Frame) {
     let top_point = pt2(0.0, height);          // Point C
     let bottom_point = pt2(0.0, -height);      // Point D
     let center = pt2(0.0, 0.0);               // Point O
-    
+
+    // Calculate tangent points
+    // For a circle, tangent points are perpendicular to the radius at that point
+    // The tangent points are at y = ±radius for vertical lines through centers
+    let point_e = pt2(-distance/2.0, radius);  // Tangent point E
+    let point_f = pt2(-distance/2.0, -radius); // Tangent point F
+    let point_g = pt2(distance/2.0, radius);   // Tangent point G
+    let point_h = pt2(distance/2.0, -radius);  // Tangent point H
+
     // Draw first circle (blue outline)
     draw.ellipse()
         .xy(center_left)
@@ -116,7 +124,27 @@ fn view(app: &App, _model: &Model, frame: Frame) {
         .color(BLACK)
         .font_size(20);
 
+    // Draw and label tangent points
+    for (point, label, offset) in [
+        (point_e, "E", vec2(-15.0, 10.0)),
+        (point_f, "F", vec2(-15.0, -25.0)),
+        (point_g, "G", vec2(15.0, 10.0)),
+        (point_h, "H", vec2(15.0, -25.0)),
+    ] {
+        draw.ellipse()
+            .xy(point)
+            .radius(point_radius)
+            .color(BLACK)
+            .w_h(point_radius * 2.0, point_radius * 2.0);
+
+        draw.text(label)
+            .xy(point + offset)
+            .color(BLACK)
+            .font_size(20);
+    }
+
     // Draw connecting lines (thin black)
+    // Original lines
     draw.line()
         .start(center_left)
         .end(center_right)
@@ -128,6 +156,72 @@ fn view(app: &App, _model: &Model, frame: Frame) {
         .end(bottom_point)
         .color(BLACK)
         .stroke_weight(1.0);
+
+    // Vertical tangent lines through A and B
+    draw.line()
+        .start(point_e)
+        .end(point_f)
+        .color(BLACK)
+        .stroke_weight(1.0);
+
+    draw.line()
+        .start(point_g)
+        .end(point_h)
+        .color(BLACK)
+        .stroke_weight(1.0);
+
+    // Horizontal tangent lines
+    draw.line()
+        .start(point_e)
+        .end(point_g)
+        .color(BLACK)
+        .stroke_weight(1.0);
+
+    draw.line()
+        .start(point_f)
+        .end(point_h)
+        .color(BLACK)
+        .stroke_weight(1.0);
+
+    // Lines showing square root relationships
+    // GA for √2
+    draw.line()
+        .start(point_g)
+        .end(center_left)  // to point A
+        .color(BLACK)
+        .stroke_weight(1.0);
+
+    // GF for √5
+    draw.line()
+        .start(point_g)
+        .end(point_f)
+        .color(BLACK)
+        .stroke_weight(1.0);
+
+    // Add square root labels, each positioned to appear only on their specific line
+    
+    // √2 label - halfway between A and GA-CD intersection
+    let ga_direction = (center_left - point_g).normalize();  // Direction from G to A
+    let label_position = point_g + ga_direction * 250.0;  // Position further down towards A
+    draw.text("√2")
+        .xy(label_position)  // Position along GA line
+        .color(BLACK)
+        .font_size(20);
+
+    // √3 label - on CD line, below origin to avoid 'O' label
+    let cd_midpoint = (top_point + bottom_point) / 2.0;
+    draw.text("√3")
+        .xy(cd_midpoint + vec2(0.0, 30.0))  // Below origin
+        .color(BLACK)
+        .font_size(20);
+
+    // √5 label - on GF line, between O and F
+    let gf_direction = (point_f - point_g).normalize();  // Direction from G to F
+    let label_position = center + gf_direction * 100.0;  // Position from O towards F
+    draw.text("√5")
+        .xy(label_position)  // Position along GF line between O and F
+        .color(BLACK)
+        .font_size(20);
 
     draw.to_frame(app, &frame).unwrap();
 }

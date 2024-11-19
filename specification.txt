@@ -1,0 +1,53 @@
+Window and Background:
+- Creates an 800x800 pixel window
+- White background
+
+Circles:
+- Two intersecting circles with equal radius of 200 units
+- Left circle drawn with blue outline
+- Right circle drawn with red outline
+- Circles intersect at their diameter (distance between centers equals radius)
+- Both circles have a stroke weight of 2.0 units and no fill
+
+Points and Labels:
+- All points are marked with small black circles of radius 4.0 units
+- Left circle center labeled 'A'
+- Right circle center labeled 'B'
+- Top intersection point labeled 'C'
+- Bottom intersection point labeled 'D'
+- Center point of intersection labeled 'O'
+- Point 'E' is where vertical line through A is tangent to left circle at top
+- Point 'F' is where vertical line through A is tangent to left circle at bottom
+- Point 'G' is where vertical line through B is tangent to right circle at top
+- Point 'H' is where vertical line through B is tangent to right circle at bottom
+
+Lines:
+- Thin black line connecting points A and B (horizontal)
+- Thin black line connecting points C and D (vertical)
+- Vertical line through A intersects circle at tangent points E (top) and F (bottom)
+- Vertical line through B intersects circle at tangent points G (top) and H (bottom)
+- Horizontal line EG is tangent to both circles at their top points
+- Horizontal line FH is tangent to both circles at their bottom points
+- Note: Lines EG and FH do not pass through points C and D respectively
+- All lines have stroke weight of 1.0 units
+
+Mathematical Properties:
+- Distance between circle centers equals the radius (creating true vesica piscis)
+- Height of intersection points (C and D) calculated using the formula: √(r² - (d/2)²)
+  where r is the radius and d is the distance between centers
+
+Label Positioning:
+- All labels are black text with 20pt font size
+- Point labels (A, B, C, D, E, F, G, H, O) are placed next to their respective points
+- Square root labels must be positioned precisely:
+  * √2 label: Positioned on GA line, halfway between point A and the GA-CD intersection
+  * √3 label: Positioned on CD line, below the origin O to avoid overlap
+  * √5 label: Positioned on GF line, between points O and F
+- Each square root label must sit directly on its corresponding line
+- No label should overlap with any other label or line
+- Labels must be clearly readable and maintain adequate spacing from all geometric elements
+
+Square Construction:
+- The vertical lines through A and B, combined with horizontal tangent lines EG and FH,
+  form a rectangle that demonstrates the relationship between these square roots
+- The rectangle is formed by lines tangent to the circles, not through intersection points
