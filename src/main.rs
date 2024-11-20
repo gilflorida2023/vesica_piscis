@@ -143,6 +143,31 @@ fn view(app: &App, _model: &Model, frame: Frame) {
             .font_size(20);
     }
 
+    // Calculate Point R (where arc from G centered at O meets x-axis)
+    // Since we're using center O, we need to calculate where the arc intersects x-axis
+    let angle_g = (radius/distance/2.0).acos(); // angle of point G from vertical
+    let r_distance = radius * angle_g.sin(); // x-coordinate of R
+    let point_r = pt2(r_distance, 0.0);   // Point R
+
+    // Draw yellow line from O to R
+    draw.line()
+        .start(center)
+        .end(point_r)
+        .color(YELLOW)
+        .stroke_weight(2.0);
+
+    // Draw point R
+    draw.ellipse()
+        .xy(point_r)
+        .radius(point_radius)
+        .color(BLACK)
+        .w_h(point_radius * 2.0, point_radius * 2.0);
+
+    draw.text("R")
+        .xy(point_r + vec2(15.0, -15.0))
+        .color(BLACK)
+        .font_size(20);
+
     // Draw connecting lines (thin black)
     // Original lines
     draw.line()

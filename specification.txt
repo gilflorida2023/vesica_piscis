@@ -35,6 +35,11 @@ Mathematical Properties:
 - Distance between circle centers equals the radius (creating true vesica piscis)
 - Height of intersection points (C and D) calculated using the formula: √(r² - (d/2)²)
   where r is the radius and d is the distance between centers
+- Point R is defined as the intersection of the x-axis with an arc from point G centered at O
+  The x-coordinate of R is calculated as: r * sin(acos(r/d/2)) where r is radius and d is distance
+- The Golden Ratio (φ) = (1 + √5) / 2 ≈ 1.618033988749895
+  This divine proportion appears throughout nature and is considered aesthetically pleasing
+  It represents a ratio where (a + b)/a = a/b, where a is the longer segment
 
 Label Positioning:
 - All labels are black text with 20pt font size
